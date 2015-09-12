@@ -1,6 +1,12 @@
-<h1>Editing Task</h1>
+<div class="container shadow">
+  <div class="row clearfix header blue-gradient">
+    <h1>Editing Task</h1>
+  </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
+  <%= render 'form' %>
+  
+  <div class="btn-group">
+    <%= link_to 'Show', @task, class: "btn btn-default" %>
+    <%= link_to 'Back', root_path, class: "btn btn-default" %>
+  </div>
+</div>

@@ -1,33 +1,61 @@
-<h1>Listing Tasks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Priority</th>
-      <th>Due date</th>
-      <th>Is completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.due_date %></td>
-        <td><%= task.is_completed %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="container shadow">
+  <div class="row clearfix header blue-gradient">
+    <h1>Tasks</h1>
+  </div>
+  
+  <div class="task-wrapper">
+    <% @completed_tasks.each do |task| %>
+      <div class="row hover-colorize">
+        <div class="col-xs-1">
+          
+        </div>
+        <div class="task col-xs-9">
+          <%= link_to task.title, task %>
+        </div>
+        <div class="buttons col-xs-2 hide">
+          <%= link_to "#" do %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% end -%>
+          <%= link_to edit_task_path(task) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end -%>
+          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', remote: true } do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end -%>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
-<br>
+<%= link_to 'New Task', new_task_path, id: 'new-task-btn', class: 'btn btn-lg btn-primary shadow' %>
 
-<%= link_to 'New Task', new_task_path %>
+<div class="container shadow">
+  <div class="row clearfix header lightgray-gradient">
+    <h1>Completed tasks</h1>
+  </div>
+  
+  <div class="task-wrapper">
+    <% @incompleted_tasks.each do |task| %>
+      <div class="row hover-colorize">
+        <div class="col-xs-1">
+          
+        </div>
+        <div class="task col-xs-9 completed">
+          <%= link_to task.title, task %>
+        </div>
+        <div class="buttons col-xs-2 hide completed">
+          <span class="glyphicon glyphicon-ok"></span>
+          |
+          <%= link_to edit_task_path(task) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          |
+          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

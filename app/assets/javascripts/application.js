@@ -11,6 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  $(".task-wrapper").find(".row").hover(
+    function () {
+      $(this).find(".buttons").removeClass("hide");
+    },
+    function () {
+      $(this).find(".buttons").addClass("hide");
+    }
+  );
+});  
