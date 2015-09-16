@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
   before_filter :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @completed_tasks = current_user.tasks
-    @incompleted_tasks = []
+    @incompleted_tasks = current_user.tasks.incompleted
+    @completed_tasks = current_user.tasks.completed
   end
 
   # GET /tasks/1
@@ -28,10 +28,10 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
-
+    @task.is_completed = false;
     respond_to do |format|
       if @task.save
-        format.html { redirect_to root_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to root_path }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @task }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -57,10 +57,21 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+      if @task.destroy
+        format.html { redirect_to tasks_url }
+        format.js   { }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def complete
+    respond_to do |format|
+      if @task.update_attribute(:is_completed, true)
+        format.html { redirect_to root_path }
+        format.js   { }
+      end
     end
   end
 

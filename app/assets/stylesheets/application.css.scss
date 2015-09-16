@@ -154,9 +154,10 @@ body {
   }
 }
 
-.completed {
+#completed {
   a {
       color: gray;
+      text-decoration: line-through;
   }
   .glyphicon-ok {
     color: green;

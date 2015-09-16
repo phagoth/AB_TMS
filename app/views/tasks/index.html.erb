@@ -1,61 +1,21 @@
-<div class="container shadow">
+<div id="incompleted" class="container shadow">
   <div class="row clearfix header blue-gradient">
     <h1>Tasks</h1>
   </div>
   
   <div class="task-wrapper">
-    <% @completed_tasks.each do |task| %>
-      <div class="row hover-colorize">
-        <div class="col-xs-1">
-          
-        </div>
-        <div class="task col-xs-9">
-          <%= link_to task.title, task %>
-        </div>
-        <div class="buttons col-xs-2 hide">
-          <%= link_to "#" do %>
-            <span class="glyphicon glyphicon-ok"></span>
-          <% end -%>
-          <%= link_to edit_task_path(task) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end -%>
-          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', remote: true } do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end -%>
-        </div>
-      </div>
-    <% end %>
+    <%= render @incompleted_tasks.order('id') %>
   </div>
 </div>
 
 <%= link_to 'New Task', new_task_path, id: 'new-task-btn', class: 'btn btn-lg btn-primary shadow' %>
 
-<div class="container shadow">
+<div id="completed" class="container shadow">
   <div class="row clearfix header lightgray-gradient">
     <h1>Completed tasks</h1>
   </div>
   
   <div class="task-wrapper">
-    <% @incompleted_tasks.each do |task| %>
-      <div class="row hover-colorize">
-        <div class="col-xs-1">
-          
-        </div>
-        <div class="task col-xs-9 completed">
-          <%= link_to task.title, task %>
-        </div>
-        <div class="buttons col-xs-2 hide completed">
-          <span class="glyphicon glyphicon-ok"></span>
-          |
-          <%= link_to edit_task_path(task) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          |
-          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    <%= render @completed_tasks.order('id') %>
   </div>
 </div>

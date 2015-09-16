@@ -1,0 +1,4 @@
+$('.complete-task').bind('ajax:success', function() {
+  item = $(this).closest('.row');
+  item.appendTo($('#completed .task-wrapper'));
+});
