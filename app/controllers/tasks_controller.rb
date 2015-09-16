@@ -28,6 +28,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
+    @task.due_date = task_params[:due_date].to_d
     @task.is_completed = false;
     respond_to do |format|
       if @task.save
@@ -43,6 +44,9 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    puts task_params[:due_date]
+    task_params[due_date: Date.parse(task_params[:due_date])]
+    puts task_params[:due_date]
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task }

@@ -13,6 +13,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datepicker3";
 
 $white_opaque: rgba(250, 250, 250, .9);
 $gray: #989898;
@@ -155,9 +156,11 @@ body {
 }
 
 #completed {
+  .task {
+    text-decoration: line-through;
+  }
   a {
       color: gray;
-      text-decoration: line-through;
   }
   .glyphicon-ok {
     color: green;
@@ -166,8 +169,20 @@ body {
     }
   }
 }
+
 #new-task-btn {
   margin-top: 1em;
+}
+.date {
+  padding-left: 0;
+  #datepicker {
+    .datepicker {
+      background-color: #FFF;
+      border: 1px solid #CCC;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 .shadow {
