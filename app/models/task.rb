@@ -8,15 +8,15 @@ class Task < ActiveRecord::Base
   validates :priority, presence: true, numericality: {only_integer: true, greater_than: 0}
   validates :due_date, presence: true, if: :is_future_date?
 
-  before_validation :is_nil?
+  before_validation :date_is_nil?
   
   before_save do
-    self.is_completed = false;
+    self.is_completed = false if is_completed.nil?
     true
   end
 
 protected
-  def is_nil?
+  def date_is_nil?
     if due_date.nil?
       errors.add(:due_date, "not a valid date!")
       false
