@@ -5,8 +5,25 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @incompleted_tasks = current_user.tasks.incompleted
-    @completed_tasks = current_user.tasks.completed
+    @incompleted_tasks = 
+      case params[:incompleted_sort]
+      when "title"
+        current_user.tasks.incompleted.order('title')
+      when "priority"
+        current_user.tasks.incompleted.order('priority')
+      else
+        current_user.tasks.incompleted.order('id')
+      end
+      
+    @completed_tasks = 
+      case params[:completed_sort]
+      when "title"
+        current_user.tasks.completed.order('title')
+      when "priority"
+        current_user.tasks.completed.order('priority')
+      else
+        current_user.tasks.completed.order('id')
+      end
   end
 
   # GET /tasks/1

@@ -4,9 +4,19 @@
   </div>
   
   <div class="task-wrapper">
-    <%= render @incompleted_tasks.order('id') %>
+    <%= render @incompleted_tasks %>
+  </div>
+  
+  <div class="sort-div">
+    Sort by:
+    <%= link_to 'Title',    tasks_path(incompleted_sort: "title", completed_sort: request.query_parameters[:completed_sort]) %>
+    |
+    <%= link_to 'Priority', tasks_path(incompleted_sort: "priority", completed_sort: request.query_parameters[:completed_sort]) %>
+    |
+    <%= link_to 'Id',       tasks_path(incompleted_sort: "id", completed_sort: request.query_parameters[:completed_sort]) %>
   </div>
 </div>
+
 
 <%= link_to 'New Task', new_task_path, id: 'new-task-btn', class: 'btn btn-lg btn-primary shadow' %>
 
@@ -16,7 +26,16 @@
   </div>
   
   <div class="task-wrapper">
-    <%= render @completed_tasks.order('id') %>
+    <%= render @completed_tasks %>
+  </div>
+
+  <div class="sort-div">
+    Sort by:
+    <%= link_to 'Title',    tasks_path(incompleted_sort: request.query_parameters[:incompleted_sort], completed_sort: "title") %>
+    |
+    <%= link_to 'Priority', tasks_path(incompleted_sort: request.query_parameters[:incompleted_sort], completed_sort: "priority") %>
+    |
+    <%= link_to 'Id',       tasks_path(incompleted_sort: request.query_parameters[:incompleted_sort], completed_sort: "id") %>
   </div>
 </div>
 
