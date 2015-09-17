@@ -1,9 +1,11 @@
 $('.complete-task').bind('ajax:success', function() {
   item = $(this).closest('.row');
+
   if (<%= @task.is_completed %>) {
     item.appendTo($('#completed .task-wrapper'));
   } else {
     item.appendTo($('#incompleted .task-wrapper'));
   }
   item.find(".buttons").addClass("hide");
+  checkEmptyContainers();// function from application.js
 });

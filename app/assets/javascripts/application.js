@@ -16,3 +16,25 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function checkEmptyContainers() {
+  if ($("#incompleted .task-wrapper")[0].childElementCount == 0) {
+    if (!$("#incompleted").hasClass("hide")) {
+      $("#incompleted").addClass("hide");
+    }
+  } else {
+    if ($("#incompleted").hasClass("hide")) {
+      $("#incompleted").removeClass("hide");
+    }
+  }
+
+  if ($("#completed .task-wrapper")[0].childElementCount == 0) {
+    if (!$("#completed").hasClass("hide")) {
+      $("#completed").addClass("hide");
+    }
+  } else {
+    if ($("#completed").hasClass("hide")) {
+      $("#completed").removeClass("hide");
+    }
+  }
+};
