@@ -68,7 +68,7 @@ class TasksController < ApplicationController
 
   def complete
     respond_to do |format|
-      if @task.update_attribute(:is_completed, true)
+      if @task.update_attribute(:is_completed, !@task.is_completed)
         format.html { redirect_to root_path }
         format.js   { }
       end
