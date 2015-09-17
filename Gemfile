@@ -51,5 +51,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'mailcatcher', '~> 0.6.1'
+
+  gem 'rspec-rails', '~> 3.3.3'
+  gem 'factory_girl_rails', '~> 4.5.0'
 end
 
