@@ -4,17 +4,19 @@
     <h1><%= @task.title %></h1>
   </div>
 
-  <p class='outlined'>
-    <%= @task.description %>
-  </p>
+  <% unless @task.description.blank? %>
+    <div class='task-description'>
+      <%= @task.description %>
+    </div>
+  <% end %>
 
-  <p>
+  <div>
     <strong>Priority:</strong>
     <%= @task.priority %>
   &nbsp
     <strong>Due date:</strong>
-    <%= @task.due_date %>
-  </p>
+    <%= @task.due_date.strftime("%B %d, %Y") %>
+  </div>
 
   <div class="btn-group">
     <%= link_to 'Edit', edit_task_path(@task), class: "btn btn-default" %>

@@ -59,7 +59,6 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    # task_params[due_date: Date.parse(task_params[:due_date])]
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task }
@@ -110,7 +109,6 @@ class TasksController < ApplicationController
         redirect_to root_path
         return
       end
-      # @task = Task.by_user(current_user).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -29,6 +29,7 @@
     <div class="col-md-4 date">
       <div class="form-group ">
         <%= f.label :due_date %><br>
+        <%= f.label @task.due_date.strftime("%B %d, %Y"), id: "visible_due_date" %><br>
         <div id="datepicker"></div>
         <%= f.hidden_field :due_date, id: "due_date" %>
       </div>
@@ -43,13 +44,14 @@
   $(document).ready(function(){
     $('#datepicker').datepicker({
       format: "yyyy-mm-dd",
-      startDate: "now",
-      todayBtn: "linked",
+      startDate: "+1d",
       todayHighlight: true
     });
   
     $("#datepicker").on("changeDate", function(event) {
-      $("#due_date").val($("#datepicker").datepicker('getFormattedDate'))
+      var date = $("#datepicker").datepicker('getFormattedDate');
+      $("#due_date").val(date);
+      $("#visible_due_date").remove();
     });
   });
 </script>

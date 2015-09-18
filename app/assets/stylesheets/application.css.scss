@@ -43,11 +43,6 @@ body {
   background-image: image-url('background.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
-  // background: -webkit-linear-gradient( #d3cdc2 40%, #d1a31e 60%, #b75a0c 100%);
-  // background:    -moz-linear-gradient( #d3cdc2 40%, #d1a31e 60%, #b75a0c 100%);
-  // background:     -ms-linear-gradient( #d3cdc2 40%, #d1a31e 60%, #b75a0c 100%);
-  // background:      -o-linear-gradient( #d3cdc2 40%, #d1a31e 60%, #b75a0c 100%);
-  // background:         linear-gradient( #d3cdc2 40%, #d1a31e 60%, #b75a0c 100%);
   background-attachment: fixed;
   padding-top: 50px;
 }
@@ -144,15 +139,6 @@ body {
       a {
         text-decoration: none;
       }
-      // span {
-      //   color: $gray;
-      //   margin-left: 5%;
-      //   margin-right: 5%;
-      //   // transition: all .4s ease-in-out;
-      //   // &:hover {
-      //   //   color: $dark;
-      //   // }
-      // }
     }
   }
 }
@@ -165,7 +151,13 @@ body {
     color: green;
   }
 }
-
+.task-description {
+  background-color: white;
+  margin: 1em 0;
+  padding: 1em;
+  border-radius: 10px;
+  border: 1px lightgrey solid;
+}
 .check-div {
   float: left;
   .delete-checked {
