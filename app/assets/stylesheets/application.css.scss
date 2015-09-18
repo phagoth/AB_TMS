@@ -166,11 +166,21 @@ body {
   }
 }
 
+.check-div {
+  float: left;
+  .delete-checked {
+    color: red;
+  }
+}
+.sort-div {
+  float: right;
+}
+
 #completed {
   .task {
     text-decoration: line-through;
   }
-  a {
+  a, .checker{
       color: gray;
   }
   .glyphicon-ok {
@@ -195,7 +205,9 @@ body {
     }
   }
 }
-
+.cursor-finger {
+  cursor: pointer;
+}
 .shadow {
   -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     member do
       patch :complete
     end
+    collection do
+      delete :batch_delete
+    end
   end
   
   authenticated :user do

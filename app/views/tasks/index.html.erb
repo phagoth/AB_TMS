@@ -7,6 +7,16 @@
     <%= render @incompleted_tasks %>
   </div>
   
+  <div class="check-div">
+    All:
+    <%= link_to "Check", "javascript:void(0);", class: "check" %>
+    |
+    <%= link_to "Uncheck", "javascript:void(0);", class: "uncheck" %>
+    |
+    <%= link_to "Inverse", "javascript:void(0);", class: "inverse" %>
+    <br>
+    <%= link_to "Delete checked", "javascript:void(0);", class: "delete-checked" %>
+  </div>
   <div class="sort-div">
     Sort by:
     <%= link_to 'Title',    tasks_path(incompleted_sort: "title", completed_sort: request.query_parameters[:completed_sort]) %>
@@ -29,6 +39,17 @@
     <%= render @completed_tasks %>
   </div>
 
+  <div class="check-div">
+    All:
+    <%= link_to "Check", "javascript:void(0);", class: "check" %>
+    |
+    <%= link_to "Uncheck", "javascript:void(0);", class: "uncheck" %>
+    |
+    <%= link_to "Inverse", "javascript:void(0);", class: "inverse" %>
+    <br>
+    <%= link_to "Delete checked", "javascript:void(0);", class: "delete-checked" %>
+  </div>
+
   <div class="sort-div">
     Sort by:
     <%= link_to 'Title',    tasks_path(incompleted_sort: request.query_parameters[:incompleted_sort], completed_sort: "title") %>
@@ -41,7 +62,9 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    
+    var incompleted = $("#incompleted");
+    var completed = $("#completed");
+
     $(".task-wrapper").find(".row").hover(
       function () {
         $(this).find(".buttons").removeClass("hide");
@@ -50,6 +73,73 @@
         $(this).find(".buttons").addClass("hide");
       }
     );
+    
+    $(".checker .glyphicon").click(function() {
+      $(this).toggleClass("glyphicon-check glyphicon-unchecked"); 
+    });
+    incompleted.find(".delete-checked").click(function() {
+      deleteCheckedTask(incompleted);
+    });
+    completed.find(".delete-checked").click(function() {
+      deleteCheckedTask(completed);
+    });
+
+    $("#incompleted .check-div .check").click(function() {
+      checkAllTasks(incompleted);
+    });
+    $("#incompleted .check-div .uncheck").click(function() {
+      uncheckAllTasks(incompleted);
+    });
+    $("#incompleted .check-div .inverse").click(function() {
+      inverseChecks(incompleted);
+    });
+    $("#completed .check-div .check").click(function() {
+      checkAllTasks(completed);
+    });
+    $("#completed .check-div .uncheck").click(function() {
+      uncheckAllTasks(completed);
+    });
+    $("#completed .check-div .inverse").click(function() {
+      inverseChecks(completed);
+    });
+
     checkEmptyContainers(); // function from application.js
   });
+
+  function checkAllTasks(container) {
+    container.find(".checker .glyphicon").removeClass("glyphicon-unchecked").addClass("glyphicon-check");
+  }
+
+  function uncheckAllTasks(container) {
+    container.find(".checker .glyphicon").removeClass("glyphicon-check").addClass("glyphicon-unchecked");
+  }
+
+  function inverseChecks(container) {
+    container.find(".checker .glyphicon").toggleClass("glyphicon-check glyphicon-unchecked");
+  }
+
+  function getCheckedIds(container) {
+    var checkedArray = [];
+    container.find(".glyphicon-check").each(function(){
+      checkedArray.push($(this).get(0).id);
+    });
+    return checkedArray;
+  }
+
+  function deleteCheckedTask(container) {
+    var checkedId = getCheckedIds(container);
+    if (checkedId.length>0) {
+      if( confirm("Are you sure?") == true ){
+        $.ajax({
+          url: "/tasks/batch_delete",
+          type: "DELETE",
+          data: {id: checkedId},
+          success: function(resp){
+            container.find(".glyphicon-check").closest(".row").remove();
+            checkEmptyContainers();
+          }
+        });
+      }
+    }
+  }
 </script>  

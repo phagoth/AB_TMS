@@ -83,6 +83,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def batch_delete
+    if current_user.tasks.where(id: params[:id]).destroy_all
+      render :json => { } # send back any data if necessary
+    else
+      render :json => { }, :status => 500
+    end
+  end
+
   def complete
     respond_to do |format|
       if @task.update_attribute(:is_completed, !@task.is_completed)
