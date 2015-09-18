@@ -9,6 +9,11 @@
 <body>
   <header class="navbar navbar-default navbar-fixed-top shadow lightgray-gradient" role="navigation">
     <div class="navbar-inner">
+      <div id="logo" class="navbar-brand">
+          <%= link_to root_path do%>
+            <span class="glyphicon glyphicon-list-alt"></span>
+          <% end -%>
+      </div>
       <nav class="collapse navbar-collapse navbar-ex1-collapse">
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
