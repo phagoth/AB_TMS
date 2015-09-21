@@ -29,7 +29,9 @@
     <div class="col-md-4 date">
       <div class="form-group ">
         <%= f.label :due_date %><br>
-        <%= f.label @task.due_date.strftime("%B %d, %Y"), id: "visible_due_date" %><br>
+        <% if @task.due_date %>
+          <%= link_to @task.due_date.strftime("%B %d, %Y"), "javascript:void(0);", id: "visible_due_date" %>
+        <% end -%>
         <div id="datepicker"></div>
         <%= f.hidden_field :due_date, id: "due_date" %>
       </div>
@@ -51,8 +53,20 @@
     $("#datepicker").on("changeDate", function(event) {
       var date = $("#datepicker").datepicker('getFormattedDate');
       $("#due_date").val(date);
-      $("#visible_due_date").remove();
+    });
+
+    if($("#visible_due_date").length){
+      $("#datepicker").hide();
+    }
+
+    $("#visible_due_date").click(function() {
+      $("#visible_due_date").hide();
+      $("#datepicker").show();
+
+      checkAllTasks(incompleted);
     });
   });
+
+
 </script>
    
