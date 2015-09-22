@@ -1,1 +1,4 @@
-$('.delete-task').bind('ajax:success', function() { $(this).closest('.row').remove(); });
+$('.delete-task').bind('ajax:success', function() { 
+  $(this).closest('.row').remove(); 
+  checkEmptyContainers(); // function from application.js
+});
